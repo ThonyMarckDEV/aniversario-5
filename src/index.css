@@ -225,46 +225,38 @@ main, .lock { position: relative; z-index: 1; }
 .lb-next { right: 16px; top: 50%; transform: translateY(-50%); }
 .lb-close { top: 16px; right: 16px; font-size: 1.2rem; }
 
-/* ---------- Timeline ---------- */
-.timeline { position: relative; margin-top: 2rem; }
-.timeline::before {
-  content: '';
+/* ---------- Corazón 3D ---------- */
+.corazon3d {
+  position: relative;
+  height: min(78vh, 720px);
+  margin: 0 -16px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 45%, rgba(255, 77, 109, 0.18), transparent 65%);
+  touch-action: pan-y;
+}
+.corazon3d canvas { display: block; cursor: grab; }
+.corazon3d canvas:active { cursor: grabbing; }
+.c3d-panel {
   position: absolute;
   left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  transform: translateX(-50%);
-  background: linear-gradient(var(--rosa), var(--rosa-claro), transparent);
-}
-.hito { position: relative; width: 50%; padding: 0 2.5rem 3rem; }
-.hito.izq { margin-right: auto; text-align: right; }
-.hito.der { margin-left: auto; text-align: left; }
-.punto {
-  position: absolute;
-  top: 0;
-  width: 34px;
-  height: 34px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--rosa);
-  color: #fff;
-  box-shadow: 0 0 0 6px rgba(255, 77, 109, 0.25);
-}
-.izq .punto { right: -17px; }
-.der .punto { left: -17px; }
-.hito-card {
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 20px;
-  padding: 1rem;
+  bottom: 18px;
+  translate: -50% 0;
+  width: min(560px, calc(100% - 32px));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 18px;
+  background: rgba(43, 10, 23, 0.7);
+  backdrop-filter: blur(10px);
   box-shadow: var(--sombra);
 }
-.hito-card img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 14px; margin-bottom: 0.8rem; }
-.anio { color: var(--rosa-claro); font-weight: 600; letter-spacing: 0.1em; }
-.hito-card h3 { font-size: 1.3rem; margin: 0.2rem 0 0.4rem; }
-.hito-card p { opacity: 0.8; font-size: 0.95rem; }
+.c3d-panel p { flex: 1; min-width: 0; font-size: 1.6rem; color: var(--rosa-palido); }
+.c3d-panel small { font-family: system-ui, sans-serif; font-size: 0.8rem; opacity: 0.7; }
+.c3d-panel .lb-btn { position: static; transform: none; flex-shrink: 0; }
 
 /* ---------- Carta ---------- */
 .sobre {
@@ -330,9 +322,7 @@ footer { text-align: center; padding: 2rem 16px 3rem; opacity: 0.6; font-size: 0
   .galeria { grid-template-columns: repeat(2, 1fr); gap: 1.4rem 1rem; }
   .atras p { font-size: 1.3rem; }
   .frente span { font-size: 1.1rem; }
-  .timeline::before { left: 16px; }
-  .hito, .hito.izq, .hito.der { width: 100%; text-align: left; padding: 0 0 2.5rem 3rem; }
-  .izq .punto, .der .punto { left: 0; right: auto; }
+  .c3d-panel p { flex-basis: 100%; order: -1; font-size: 1.3rem; }
   .contador-item { min-width: 70px; }
   .contador-item .num { font-size: 1.4rem; }
   .lb-prev, .lb-next { top: auto; bottom: 20px; transform: none; }
