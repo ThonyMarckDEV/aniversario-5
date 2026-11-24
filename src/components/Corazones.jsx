@@ -1,22 +1,19 @@
-import { useMemo } from 'react'
+// Corazones flotando en el fondo.
+// Se generan una sola vez al cargar el módulo (fuera del render) para que
+// sus posiciones no cambien en cada re-render.
+const CORAZONES = Array.from({ length: 18 }, (_, i) => ({
+  id: i,
+  left: Math.random() * 100,
+  size: 10 + Math.random() * 22,
+  dur: 9 + Math.random() * 12,
+  delay: -Math.random() * 20,
+  emoji: ['❤', '💕', '💖', '✨'][i % 4],
+}))
 
-// Corazones flotando en el fondo
-export default function Corazones({ cantidad = 18 }) {
-  const items = useMemo(
-    () =>
-      Array.from({ length: cantidad }, (_, i) => ({
-        id: i,
-        left: Math.random() * 100,
-        size: 10 + Math.random() * 22,
-        dur: 9 + Math.random() * 12,
-        delay: -Math.random() * 20,
-        emoji: ['❤', '💕', '💖', '✨'][i % 4],
-      })),
-    [cantidad],
-  )
+export default function Corazones() {
   return (
     <div className="corazones" aria-hidden="true">
-      {items.map((c) => (
+      {CORAZONES.map((c) => (
         <span
           key={c.id}
           style={{
